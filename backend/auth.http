@@ -22,10 +22,3 @@ Content-Type: application/json
     "email": "prueba.nuevo@test.com",
     "contraseña": "miContraseñaSegura123"
 }
-
-### 3. PROBAR RUTA PROTEGIDA (GET /vehicles)
-# **Requisito:** Debes copiar el valor del token (JWT) de la respuesta del paso 2.
-
-# 🔑 Nota: Reemplaza <TOKEN_JWT_AQUI> con el token real
-GET http://localhost:3000/api/vehicles
-Authorization: Bearer <TOKEN_JWT_AQUI>
