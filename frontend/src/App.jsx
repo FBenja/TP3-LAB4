@@ -6,6 +6,9 @@ import { StrictMode } from 'react';
 import Register from './pages/Register.jsx';
 import { VehicleEdit } from './pages/VehicleEdit.jsx';
 import VehicleList from './pages/VehicleList.jsx';
+import Dashboard from './pages/Dashboard.jsx';
+import DriverList from './pages/Driverlist.jsx';
+import { DriverEdit } from './pages/DriverEdit.jsx';
 
 const ProtectedRoute = ({ children }) => {
     const { isAuthenticated } = useAuth();
@@ -30,12 +33,13 @@ function App() {
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         
-                       {/* RUTA DE LISTADO: Muestra la tabla completa (sin ID) */}
+                        {/*RUTAS PRIVADAS */}
                         <Route path='vehicles' element={<ProtectedRoute><VehicleList/></ProtectedRoute>} />
-                        
-                        {/* RUTA DE EDICIÓN: Espera un ID en la URL para editar un elemento */}
-                        <Route path='vehicles/edit/:id' element={<ProtectedRoute><VehicleEdit/></ProtectedRoute>} />
-                        
+                        <Route path='vehicles/:id' element={<ProtectedRoute><VehicleEdit/></ProtectedRoute>} />
+                        {/* <Route path="vehicles/new" element={<ProtectedRoute><VehicleEdit /></ProtectedRoute>} /> */}
+                        <Route path='dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
+                        <Route path="drivers" element={<ProtectedRoute><DriverList/></ProtectedRoute>} />
+                        <Route path="drivers/edit/:id" element={<ProtectedRoute> { <DriverEdit /> } </ProtectedRoute>} />
                         {/* 404 Not Found */}
                         <Route path="*" element={<h1>404: Página no encontrada</h1>} />
 

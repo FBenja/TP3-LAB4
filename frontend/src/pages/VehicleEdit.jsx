@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import  { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext'; 
 import { useNavigate, useParams } from 'react-router-dom'; 
 import { Container, Box, Typography, TextField, Button, CircularProgress, Alert, Grid } from '@mui/material';
@@ -16,18 +16,25 @@ export const VehicleEdit = () => {
     const { id } = useParams(); 
     const navigate = useNavigate();
 
-    if (!id) {
-        
-        navigate('/vehicles'); 
-        return null;
-    }
-
+    
+    const isNew = id === 'new'; 
+    const isIdInvalid = !id && id !== 'new';
+    
     const [values, setValues] = useState(initialVehicleState);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(!isNew); 
     const [error, setError] = useState(null);
+
+
+    useEffect(() => {
+        if (isIdInvalid) { 
+             navigate('/vehicles', { replace: true });
+        }
+    }, [id, navigate,isIdInvalid]);
 
     // --- Cargar datos del vehículo ---
     const fetchVehicle = useCallback(async () => {
+        if(isNew||isIdInvalid) return;
+
         setLoading(true);
         const response = await fetchAuth(`/vehicles/${id}`, { method: 'GET' }); 
         const data = await response.json();
@@ -41,14 +48,17 @@ export const VehicleEdit = () => {
         // Ajustar el formato de la carga si es necesario (ej: convertir a número)
         setValues({
             ...data,
-            capacidad_carga: data.capacidad_carga.toString(), // Para mostrar correctamente en el input
+            capacidad_carga: data.capacidad_carga.toString(), 
         });
         setLoading(false);
-    }, [fetchAuth, id]);
+    }, [fetchAuth, id,isNew,isIdInvalid]);
 
     useEffect(() => {
         fetchVehicle();
-    }, [fetchVehicle]);
+    }, [fetchVehicle,loading]);
+    if (isIdInvalid) {
+        return null; 
+    }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -61,15 +71,17 @@ export const VehicleEdit = () => {
         setLoading(true);
         setError(null);
 
+        const method = isNew ? "POST" : "PUT";
+        const url = isNew ? `/vehicles` : `/vehicles/${id}`
         const payload = {
             ...values,
-            // Asegurar que la capacidad de carga se envíe como número si es necesario
             capacidad_carga: parseFloat(values.capacidad_carga),
+            año: parseInt(values.año)
         };
         
-        // La URL completa es /api/vehicles/:id (el prefijo /api ya está en fetchAuth)
-        const response = await fetchAuth(`/vehicles/${id}`, { 
-            method: "PUT",
+        
+        const response = await fetchAuth(url, { 
+            method: method,
             body: JSON.stringify(payload),
         });
 
@@ -78,11 +90,11 @@ export const VehicleEdit = () => {
 
         if (!response.ok) {
             const errorMsg = data.errors ? data.errors[0].msg : data.msg;
-            return setError(`Error al modificar: ${errorMsg}`);
+            return setError(`Error al ${isNew? 'crear': 'modificar'}: ${errorMsg}`);
         }
 
-        window.alert("Vehículo modificado con éxito.");
-        navigate("/vehicles"); // Redirigir al listado
+        window.alert(`Vehículo ${isNew ? 'creado': 'modificado' }con éxito.`);
+        navigate("/vehicles"); 
     };
 
     if (loading) {
@@ -96,7 +108,9 @@ export const VehicleEdit = () => {
     return (
         <Container component="main" maxWidth="sm">
             <Box sx={{ mt: 4 }}>
-                <Typography variant="h4" gutterBottom>Modificar Vehículo (ID: {id})</Typography>
+                <Typography variant="h4" gutterBottom>
+                    {isNew ? 'Registrar Nuevo Vehículo' : `Modificar Vehículo (ID: ${id})`}
+                </Typography>
                 
                 {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
 
@@ -115,12 +129,12 @@ export const VehicleEdit = () => {
                             <TextField fullWidth margin="normal" label="Año" name="año" type="number" value={values.año || ''} onChange={handleChange} required />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField fullWidth margin="normal" label="Capacidad Carga (t)" name="capacidad_carga" type="number" step="0.01" value={values.capacidad_carga || ''} onChange={handleChange} required />
+                            <TextField fullWidth margin="normal" label="Capacidad Carga (kg)" name="capacidad_carga" type="number" step="0.01" value={values.capacidad_carga || ''} onChange={handleChange} required />
                         </Grid>
                     </Grid>
                     
                     <Button type="submit" variant="contained" sx={{ mt: 3, mr: 2 }} disabled={loading}>
-                        Guardar Cambios
+                        {isNew ? 'Crear Vehículo' : 'Guardar Cambios'}
                     </Button>
                     <Button onClick={() => navigate('/vehicles')} variant="outlined" sx={{ mt: 3 }}>
                         Cancelar

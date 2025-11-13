@@ -4,6 +4,9 @@ import { conectarDB } from "./db.js";
 import authRouter from "./src/routes/auth.route.js";
 import { authConfig } from "./src/middlewares/auth.middleware.js";
 import vehicleRouter from "./src/routes/vehicles.js"
+import driverRouter from "./src/routes/driver.js"
+
+
 conectarDB();
 
 const app = express();
@@ -25,6 +28,7 @@ app.get("/", (req, res) => {
 
 app.use('/api/auth', authRouter);
 app.use('/api/vehicles',vehicleRouter)
+app.use('/api/drivers',driverRouter)
 
 
 

@@ -1,0 +1,52 @@
+@url=http://localhost:3000
+@id_conductor=1
+@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYzMDE4MzY2LCJleHAiOjE3NjMwMjU1NjZ9.GlNmbE8IGMk7o3-WoxDg6K6GoXyoyU974L1k5_HaSQI
+
+
+### 1. REGISTRAR NUEVO CONDUCTOR (POST /api/drivers)
+POST {{url}}/api/drivers
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "nombre": "Javier",
+    "apellido": "Perez",
+    "DNI": "20555888",
+    "licencia": "CLASE-E-001",
+    "fecha_vencimiento_licencia": "2028-11-20"
+}
+
+
+### 2. LISTAR TODOS LOS CONDUCTORES (GET /api/drivers)
+GET {{url}}/api/drivers
+Authorization: Bearer {{jwt_token}}
+
+---
+
+### 3. OBTENER UN CONDUCTOR POR ID (GET /api/drivers/:id)
+
+GET {{url}}/api/drivers/{{id_conductor}}
+Authorization: Bearer {{jwt_token}}
+
+---
+
+### 4. MODIFICAR UN CONDUCTOR (PUT /api/drivers/:id)
+# Modifica el nombre y la fecha de vencimiento
+PUT {{url}}/api/drivers/{{id_conductor}}
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "nombre": "Javier MODIFICADO",
+    "apellido": "Perez",
+    "DNI": "20555888",
+    "licencia": "CLASE-E-001",
+    "fecha_vencimiento_licencia": "2029-01-01"
+}
+
+
+
+### 5. ELIMINAR CONDUCTOR (DELETE /api/drivers/:id)
+
+DELETE {{url}}/api/drivers/{{id_conductor}}
+Authorization: Bearer {{jwt_token}}

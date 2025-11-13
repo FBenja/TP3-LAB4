@@ -82,15 +82,16 @@ export const VehicleList = () => {
     };
 
     // --- 3. Navegación / Botones ---
+    const handleNavigateNew = () => {
+        
+        navigate('/vehicles/new');
+    };
+
     const handleNavigateEdit = (id) => {
-        navigate(`/vehicles/edit/${id}`);
+        navigate(`/vehicles/${id}`);
     };
     
-    const handleNavigateNew = () => {
-        // Redirige a la ruta donde se manejará la creación (ej: un modal o un formulario separado)
-        // Por ahora, solo es una acción, ya que la creación se suele integrar en esta misma página con un Modal.
-        alert("Botón de 'Agregar Vehículo' pulsado. Aquí iría la lógica para abrir el formulario de Alta.");
-    };
+    
 
     const displayError = error || authError;
 
@@ -121,7 +122,7 @@ export const VehicleList = () => {
                                 <TableCell>Modelo</TableCell>
                                 <TableCell>Patente</TableCell>
                                 <TableCell align="right">Año</TableCell>
-                                <TableCell align="right">Capacidad (t)</TableCell>
+                                <TableCell align="right">Capacidad (kg)</TableCell>
                                 <TableCell align="center">Acciones</TableCell>
                             </TableRow>
                         </TableHead>
