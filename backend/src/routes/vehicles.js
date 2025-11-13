@@ -13,5 +13,6 @@ router.get('/', authenticate, vehicleController.getAllVehicles);
 router.post('/', authenticate, vehicleValidation, vehicleController.createVehicle);
 router.put('/:id', authenticate, vehicleValidation, vehicleController.updateVehicle);
 router.delete('/:id', authenticate, vehicleController.deleteVehicle);
+router.get('/:id', authenticate, vehicleController.getVehicleById)
 
 export default router;
