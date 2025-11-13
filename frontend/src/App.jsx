@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import {BrowserRouter, Route, Routes, Navigate} from "react-router-dom"
 import  {Login } from './pages/Login.jsx';
 import { StrictMode } from 'react';
+import Register from './pages/Register.jsx';
 
 const ProtectedRoute = ({ children }) => {
     const { isAuthenticated } = useAuth();
@@ -25,7 +26,7 @@ function App() {
                         
                         {/* Rutas Públicas (se renderizan dentro de <Outlet />) */}
                         <Route path="/login" element={<Login />} />
-                        {/* <Route path="/register" element={<Register />} /> */}
+                        <Route path="/register" element={<Register />} />
                         
                         
                         

@@ -8,9 +8,9 @@ POST {{url}}/api/auth/register
 Content-Type: application/json
 
 {
-    "nombre": "Conductor Prueba",
-    "email": "prueba.nuevo@test.com",
-    "contraseña": "miContraseñaSegura123"
+    "nombre": "bwia",
+    "email": "bwia279@gmail.com",
+    "contraseña": "Admin123"
 }
 
 ### 2. INICIAR SESIÓN (POST /login)

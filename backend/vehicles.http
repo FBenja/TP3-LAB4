@@ -1,0 +1,38 @@
+@url=http://localhost:3000
+@id_vehiculo=1
+@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYzMDA0OTg2LCJleHAiOjE3NjMwMTIxODZ9.UG0wzWxdLrLk4fj8z-i54PzvsbGUPzw_Ff89s8GvmVg
+
+### 0. LISTA DE VEHICULOS (GET /)
+GET {{url}}/api/vehicles
+Authorization: Bearer {{jwt_token}}
+
+### 1. REGISTRAR NUEVO VEHICULO (POST /VEHICLE)
+POST {{url}}/api/vehicles
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "marca": "Chevrolet",
+    "modelo": "onyx",
+    "patente": "gsk304",
+    "año": 1996,
+    "capacidad_carga":500
+}
+
+### 2. MODIFICAR VEHICULO (PUT /api/vehicles/:id)
+PUT {{url}}/api/vehicles/{{id_vehiculo}}
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "marca": "Chevrolet",
+    "modelo": "Cruze MODIFICADO",
+    "patente": "GSK303",
+    "año": 2021,
+    "capacidad_carga": 650.00
+}
+
+### 3. ELIMINAR VEHICULO (POST /api/vehicles/:id)
+DELETE {{url}}/api/vehicles/{{id_vehiculo}}
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}

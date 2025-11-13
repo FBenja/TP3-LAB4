@@ -12,8 +12,16 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
     
-    const [token, setToken] = useState(localStorage.getItem('token'));
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null); // Contiene id, nombre, email
+    const storedUser = localStorage.getItem('user');
+    const storedToken = localStorage.getItem('token')
+
+    const parsedUser = 
+        storedUser && storedUser !== "undefined"
+        ? JSON.parse(storedUser)
+        : null
+
+    const [token, setToken] = useState(storedToken|| null);
+    const [user, setUser] = useState(parsedUser) // Contiene id, nombre, email
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
@@ -25,7 +33,7 @@ export const AuthProvider = ({ children }) => {
             const response = await fetch(`http://localhost:3000/api/auth/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, contraseña:password }),
+                body: JSON.stringify({ email, contraseña:password}),
             });
 
             const session = await response.json();
