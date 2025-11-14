@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext'; 
 
 export const DriverList = () => {
-    // Usamos fetchAuth del hook de autenticación
     const { fetchAuth, error: authError } = useAuth();
     const navigate = useNavigate();
     
@@ -77,11 +76,11 @@ export const DriverList = () => {
 
     // --- Navegación ---
     const handleNavigateEdit = (id) => {
-        navigate(`/drivers/edit/${id}`);
+        navigate(`/drivers/${id}`);
     };
     
     const handleNavigateNew = () => {
-        navigate(`/drivers/new`); // Asumimos una ruta para el formulario de Alta
+        navigate(`/drivers/new`); 
     };
 
     const displayError = error || authError;

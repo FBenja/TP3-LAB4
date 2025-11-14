@@ -71,8 +71,12 @@ export const DriverEdit = () => {
         }
 
         window.alert(`Conductor ${isNew ? 'creado' : 'modificado'} con éxito.`);
-        navigate("/drivers"); // Redirigir al listado
+        navigate("/drivers"); 
     };
+
+//     const handleNavigateNew = () => {
+//     navigate('/drivers/new'); 
+// };
 
     if (loading) {
         return <Container sx={{ mt: 5, textAlign: 'center' }}><CircularProgress /></Container>;

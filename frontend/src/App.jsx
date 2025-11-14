@@ -39,7 +39,7 @@ function App() {
                         {/* <Route path="vehicles/new" element={<ProtectedRoute><VehicleEdit /></ProtectedRoute>} /> */}
                         <Route path='dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
                         <Route path="drivers" element={<ProtectedRoute><DriverList/></ProtectedRoute>} />
-                        <Route path="drivers/edit/:id" element={<ProtectedRoute> { <DriverEdit /> } </ProtectedRoute>} />
+                        <Route path="drivers/:id" element={<ProtectedRoute> { <DriverEdit /> } </ProtectedRoute>} />
                         {/* 404 Not Found */}
                         <Route path="*" element={<h1>404: Página no encontrada</h1>} />
 

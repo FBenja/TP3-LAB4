@@ -55,7 +55,7 @@ export const VehicleEdit = () => {
 
     useEffect(() => {
         fetchVehicle();
-    }, [fetchVehicle,loading]);
+    }, [fetchVehicle]);
     if (isIdInvalid) {
         return null; 
     }
