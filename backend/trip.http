@@ -1,0 +1,66 @@
+@url=http://localhost:3000
+@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYzMDg4NzMxLCJleHAiOjE3NjMwOTU5MzF9.hML_NO9CnkA1fBbFzpQospNSBMbFvIMGbFKe_UgbGC4
+@vehiculo_id=4
+@conductor_id=1
+
+
+### 1. REGISTRAR PRIMER VIAJE (POST /api/trips)
+# Este viaje suma 200 KM al conductor/vehiculo ID 1.
+POST {{url}}/api/trips
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "vehiculo_id": {{vehiculo_id}},
+    "conductor_id": {{conductor_id}},
+    "fecha_salida": "2025-11-10T08:00:00",
+    "fecha_llegada": "2025-11-10T12:00:00",
+    "origen": "La Rioja",
+    "destino": "San Juan",
+    "kilómetros": 200.50,
+    "observaciones": "Primer viaje de prueba"
+}
+
+
+
+### 2. REGISTRAR SEGUNDO VIAJE (POST /api/trips)
+# Este viaje suma 50 KM más al conductor/vehiculo ID 1.
+POST {{url}}/api/trips
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "vehiculo_id": {{vehiculo_id}},
+    "conductor_id": {{conductor_id}},
+    "fecha_salida": "2025-11-11T14:00:00",
+    "fecha_llegada": "2025-11-11T16:00:00",
+    "origen": "San Juan",
+    "destino": "Mendoza",
+    "kilómetros": 50.00,
+    "observaciones": "Viaje corto de retorno"
+}
+
+
+
+### 3. CÁLCULO TOTAL DE KM POR CONDUCTOR (GET /total-km/driver/:id)
+# Resultado esperado: ~250.50 KM
+GET {{url}}/api/trips/total-km/driver/{{conductor_id}}
+Authorization: Bearer {{jwt_token}}
+
+
+### 4. CÁLCULO TOTAL DE KM POR VEHÍCULO (GET /total-km/vehicle/:id)
+# Resultado esperado: ~250.50 KM
+GET {{url}}/api/trips/total-km/vehicle/{{vehiculo_id}}
+Authorization: Bearer {{jwt_token}}
+
+
+
+### 5. CONSULTA DE HISTORIAL POR CONDUCTOR (GET /history/driver/:id)
+GET {{url}}/api/trips/history/driver/{{conductor_id}}
+Authorization: Bearer {{jwt_token}}
+
+
+
+### 6. CONSULTA DE HISTORIAL POR VEHÍCULO (GET /history/vehicle/:id)
+GET {{url}}/api/trips/history/vehicle/{{vehiculo_id}}
+Authorization: Bearer {{jwt_token}}

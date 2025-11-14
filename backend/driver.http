@@ -1,6 +1,6 @@
 @url=http://localhost:3000
 @id_conductor=1
-@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYzMDE4MzY2LCJleHAiOjE3NjMwMjU1NjZ9.GlNmbE8IGMk7o3-WoxDg6K6GoXyoyU974L1k5_HaSQI
+@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYzMDg4NzMxLCJleHAiOjE3NjMwOTU5MzF9.hML_NO9CnkA1fBbFzpQospNSBMbFvIMGbFKe_UgbGC4
 
 
 ### 1. REGISTRAR NUEVO CONDUCTOR (POST /api/drivers)

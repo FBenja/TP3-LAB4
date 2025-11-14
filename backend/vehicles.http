@@ -1,6 +1,6 @@
 @url=http://localhost:3000
 @id_vehiculo=2
-@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYzMDA0OTg2LCJleHAiOjE3NjMwMTIxODZ9.UG0wzWxdLrLk4fj8z-i54PzvsbGUPzw_Ff89s8GvmVg
+@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYzMDg4NzMxLCJleHAiOjE3NjMwOTU5MzF9.hML_NO9CnkA1fBbFzpQospNSBMbFvIMGbFKe_UgbGC4
 
 ### 0. LISTA DE VEHICULOS (GET /)
 GET {{url}}/api/vehicles

@@ -5,7 +5,7 @@ import authRouter from "./src/routes/auth.route.js";
 import { authConfig } from "./src/middlewares/auth.middleware.js";
 import vehicleRouter from "./src/routes/vehicles.js"
 import driverRouter from "./src/routes/driver.js"
-
+import tripRouter from "./src/routes/trip.js"
 
 conectarDB();
 
@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 app.use('/api/auth', authRouter);
 app.use('/api/vehicles',vehicleRouter)
 app.use('/api/drivers',driverRouter)
-
+app.use('/api/trips',tripRouter)
 
 
 app.listen(port, () => {

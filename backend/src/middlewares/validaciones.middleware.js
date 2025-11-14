@@ -25,3 +25,11 @@ export const driverValidation = [
     body('licencia').notEmpty().withMessage('La licencia es obligatoria.'),
     body('fecha_vencimiento_licencia').isDate({ format: 'YYYY-MM-DD' }).withMessage('Fecha de vencimiento inválida o formato incorrecto (YYYY-MM-DD).'),
 ];
+
+export const tripValidation = [
+    body('vehiculo_id').isInt().withMessage('El ID de vehículo debe ser un número entero.'),
+    body('conductor_id').isInt().withMessage('El ID de conductor debe ser un número entero.'),
+    body('fecha_salida').isISO8601().withMessage('Formato de fecha de salida inválido.'),
+    body('fecha_llegada').isISO8601().withMessage('Formato de fecha de llegada inválido.'),
+    body('kilómetros').isFloat({ gt: 0 }).withMessage('Los kilómetros deben ser un número positivo.'),
+];
