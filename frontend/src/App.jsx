@@ -9,6 +9,7 @@ import VehicleList from './pages/VehicleList.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import DriverList from './pages/Driverlist.jsx';
 import { DriverEdit } from './pages/DriverEdit.jsx';
+import TripManagement from './pages/TripManagement.jsx';
 
 const ProtectedRoute = ({ children }) => {
     const { isAuthenticated } = useAuth();
@@ -40,6 +41,7 @@ function App() {
                         <Route path='dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
                         <Route path="drivers" element={<ProtectedRoute><DriverList/></ProtectedRoute>} />
                         <Route path="drivers/:id" element={<ProtectedRoute> { <DriverEdit /> } </ProtectedRoute>} />
+                        <Route path= "trips" element= {<ProtectedRoute>{<TripManagement></TripManagement>} </ProtectedRoute>} />
                         {/* 404 Not Found */}
                         <Route path="*" element={<h1>404: Página no encontrada</h1>} />
 
